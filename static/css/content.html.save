@@ -1,0 +1,109 @@
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Content</title>
+j  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <style>
+      body {    
+    background: url('https://cdn.wallpapersafari.com/66/69/Zuysr2.jpg') no-repeat center fixed;     
+    background-size: cover;
+}
+.menu {
+	background: #2c3e50;
+    padding: 20px 0;
+}
+.menu ul {
+	margin: 0;
+    padding: 0;
+    text-align: center;
+ }
+.menu ul li {
+ 	list-style: none;
+    margin: 0 20px;
+    display: inline;
+ }
+ 
+.menu ul li a {
+	color: #fff;
+    font-size: 1em;
+    line-height: 1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: inline-block;
+    font-weight: 700;
+   }
+.menu ul li a.active {
+background: #E91E63;
+}
+
+.menu ul li:hover a {
+background: #E91E63;
+}
+
+
+  </style>
+<script>
+    $(document).ready(function(){
+      load_data();
+      function load_data(query)
+      {
+       $.ajax({
+        url:"/ajaxgetcontent",
+        method:"POST",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#contentresult').html(data);
+          $("#contentresult").append(data.htmlresponse);
+        }
+       });
+      }
+      $('#contentcsp').change(function(){
+        var search = $(this).val();
+        if(search != ''){
+            load_data(search);
+       }else{
+        load_data();
+       }
+      });
+    });
+</script>
+</head>
+<body>
+    <div class="menu">
+        <ul>
+        <li><a href=studyboard>home</a></li>
+        <li><a href=quizdisplay>Quiz</a></li>
+        <li><a class="active">Course</a></li>
+        <li><a href=brainstroming>Flash Cards</a></li>
+        </ul>
+        </div>
+  <div class="container">    
+     <br />
+     <h3 style="font-size: 50px;text-align: center;">Course Contents</h3>
+     <br />
+            <br />
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select name="contentcsp" id="contentcsp" class="form-control">
+                            <option value="all">Select a Cloud</option>
+                            <option value="GCP">GCP</option>
+                            <option value="AWS">AWS</option>
+                            <option value="Azure">AZURE</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="contentresult"></div>
+    </div> 
+ </body>
+</html>

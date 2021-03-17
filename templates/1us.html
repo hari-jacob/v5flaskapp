@@ -1,0 +1,80 @@
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Certificates</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <style>
+    @import url('http://fonts.cdnfonts.com/css/reckoner');
+    @import url('http://fonts.cdnfonts.com/css/mismo');                
+  </style>
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/home.css') }}">
+  <!-- <link rel="stylesheet" type="text/css" href="home.css"> -->
+<script>
+    $(document).ready(function(){
+      load_data();
+      function load_data(query)
+      {
+       $.ajax({
+        url:"/ajaxgetcertificate",
+        method:"POST",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#certificateresult').html(data);
+          $("#certificateresult").append(data.htmlresponse);
+        }
+       });
+      }
+      $('#certificatecsp').change(function(){
+        var search = $(this).val();
+        if(search != ''){
+            load_data(search);
+       }else{
+        load_data();
+       }
+      });
+    });
+</script>
+</head>
+<body>
+  <div>
+    <nav class="navbar">
+		<ul class="leftnav" id="leftnav">
+			<div class="logo"><img src="https://www.igta5.com/images/gta-v-five-logo-v-only.png" alt=""></div>
+			<li><a href=home>Home</a></li>
+      <li><a class="active" href=usercertificate>My Certifications</a></li>
+      <li><a  href=addcertificate>Add One</a></li>
+      <li><a target="_blank" href=studyboard>Study Board</a></li>
+		</ul>
+		<div class="rightnav">
+			<button class="btn" onclick="window.location.href=signout" id="signout">Sign-out</button>
+		</div>
+	</nav>
+	</div>
+  <div class="container">    
+     <br />
+     <h3 style="font-family:'Mismo', sans-serif;font-size: 50px;color:whitesmoke;text-align: center;">My Certificates</h3>
+     <br />
+            <br />
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select name="certificatecsp" id="certificatecsp" class="form-control">
+                            <option value="">Select a Cloud</option>
+                            <option value="all">All</option>
+                            <option value="GCP">GCP</option>
+                            <option value="AWS">AWS</option>
+                            <option value="Azure">AZURE</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="certificateresult"></div>
+    </div> 
+ </body>
+</html>

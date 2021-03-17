@@ -1,0 +1,177 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"></script>
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/quizdisplay.css') }}">
+  <!-- <link rel="stylesheet" type="text/css" href="quizdisplay.css"> -->
+  <style>
+    @import url('http://fonts.cdnfonts.com/css/reckoner');
+    @import url('http://fonts.cdnfonts.com/css/mismo');
+    body {    
+      background: url('https://static.wixstatic.com/media/be51ab_1192a3cec3e745f7a7bb9db6dabde1f5~mv2.jpg/v1/fill/w_925,h_433,al_c,q_90,usm_0.66_1.00_0.01/be51ab_1192a3cec3e745f7a7bb9db6dabde1f5~mv2.webp') no-repeat center fixed;     
+      background-size: cover;
+    }
+    </style>
+</head>
+<body>
+  <div>
+    <nav class="navbar">
+      <ul class="leftnav" id="leftnav">
+        <div class="logo"><img src="https://www.igta5.com/images/gta-v-five-logo-v-only.png" alt=""></div>
+        <li><a class="active" href=studyboard>Home</a></li>
+        <li><a href=quizdisplay>Quiz</a></li>
+        <li><a href=content>Courses</a></li>
+        <li><a href=brainstroming>Brain Storm</a></li>
+      </ul>
+      <div class="rightnav">
+        <button class="btn" onclick="window.location.href=signout" id="signout">Sign-out</button>
+      </div>
+    </nav>
+  </div>
+  <br/>
+  <br>
+     <h3 style="font-family:'Mismo', sans-serif;font-size: 40px;color:whitesmoke;text-align: center;">Hola {{email}} !</h3>
+  <br />
+  <br />
+  <div class="wrapper">
+    <div class="card">
+      <div class="circle">
+        <div class="bar"></div>
+        <div class="box"><span></span></div>
+      </div>
+      <div class="text">GCP</div>
+    </div>
+    <div class="card js">
+      <div class="circle">
+        <div class="bar"></div>
+        <div class="box"><span></span></div>
+      </div>
+      <div class="text">AWS</div>
+    </div>
+    <div class="card react">
+      <div class="circle">
+        <div class="bar"></div>
+        <div class="box"><span></span></div>
+      </div>
+      <div class="text">Azure</div>
+    </div>
+  </div>
+
+{% block javascript %}
+<script>
+var gcp = {{gcp}}, azure = {{azure}}, aws = {{aws}};
+    let options = {
+      startAngle: -1.55,
+      size: 150,
+      value: {{gcp}},
+      fill: {gradient: ['#a445b2', '#fa4299']}
+    }
+    $(".circle .bar").circleProgress(options).on('circle-animation-progress',
+    function(event, progress, stepValue){
+      $(this).parent().find("span").text(String(stepValue.toFixed(2).substr(2)) + "%");
+    });
+$(".js .bar").circleProgress({
+      value: {{aws}}
+    });
+    $(".react .bar").circleProgress({
+      value: {{azure}}
+    });
+</script>
+{% endblock %}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Poppins', sans-serif;
+}
+
+.wrapper{
+align-items: center;
+justify-content: center;
+/* min-height: 100vh; */
+margin-top: 40px;
+padding: 20px;
+margin-left: 350px;
+width: 800px;
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-between;
+}
+.wrapper .card{
+background: #fff;
+width: calc(33% - 20px);
+height: 300px;
+border-radius: 5px;
+display: flex;
+align-items: center;
+justify-content: space-evenly;
+flex-direction: column;
+box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+.wrapper .card .circle{
+position: relative;
+height: 150px;
+width: 150px;
+border-radius: 50%;
+cursor: default;
+}
+.card .circle .box,
+.card .circle .box span{
+position: absolute;
+top: 50%;
+left: 50%;
+}
+.card .circle .box{
+height: 100%;
+width: 100%;
+background: #fff;
+border-radius: 50%;
+transform: translate(-50%, -50%) scale(0.8);
+transition: all 0.2s;
+}
+.card .circle:hover .box{
+transform: translate(-50%, -50%) scale(0.91);
+}
+.card .circle .box span,
+.wrapper .card .text{
+background: -webkit-linear-gradient(left, #a445b2, #fa4299);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.circle .box span{
+font-size: 38px;
+font-family: sans-serif;
+font-weight: 600;
+transform: translate(-45%, -45%);
+transition: all 0.1s;
+}
+.card .circle:hover .box span{
+transform: translate(-45%, -45%) scale(1.09);
+}
+.card .text{
+font-size: 20px;
+font-weight: 600;
+}
+@media(max-width: 753px){
+.wrapper{
+  max-width: 700px;
+}
+.wrapper .card{
+  width: calc(50% - 20px);
+  margin-bottom: 20px;
+}
+}
+@media(max-width: 505px){
+.wrapper{
+  max-width: 500px;
+}
+.wrapper .card{
+  width: 100%;
+}
+}
+</style>

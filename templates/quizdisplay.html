@@ -1,0 +1,86 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bamboozle</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/quizdisplay.css') }}">
+  <!-- <link rel="stylesheet" type="text/css" href="quizdisplay.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<style>
+  @import url('http://fonts.cdnfonts.com/css/reckoner');
+  @import url('http://fonts.cdnfonts.com/css/mismo');
+  body {    
+    background: url('https://static.wixstatic.com/media/be51ab_1192a3cec3e745f7a7bb9db6dabde1f5~mv2.jpg/v1/fill/w_925,h_433,al_c,q_90,usm_0.66_1.00_0.01/be51ab_1192a3cec3e745f7a7bb9db6dabde1f5~mv2.webp') no-repeat center fixed;     
+    background-size: cover;
+  }
+  </style>
+<script>
+    $(document).ready(function(){
+      load_data();
+      function load_data(query)
+      {
+       $.ajax({
+        url:"/ajaxdisplayquiz",
+        method:"POST",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#quizavail').html(data);
+          $("#quizavail").append(data.htmlresponse);
+        }
+       });
+      }
+      $('#quizcsp').change(function(){
+        var search = $(this).val();
+        if(search != ''){
+            load_data(search);
+       }else{
+       }
+      });
+    });
+</script>
+
+</head>
+ <body>
+  <nav class="navbar">
+    <ul class="leftnav" id="leftnav">
+      <div class="logo"><img src="https://www.igta5.com/images/gta-v-five-logo-v-only.png" alt=""></div>
+      <li><a href=studyboard>Home</a></li>
+      <li><a class="active" href=#quizdisplay>Quiz</a></li>
+      <li><a href=content>Courses</a></li>
+      <li><a href=brainstroming>Brain Storm</a></li>
+    </ul>
+    <div class="rightnav">
+      <button class="btn" onclick="window.location.href=signout" id="signout">Sign-out</button>
+    </div>
+  </nav>
+</div>
+<div class="container">    
+   <br />
+   <h3 style="font-family:'Mismo', sans-serif;font-size: 50px;color:whitesmoke;text-align: center;">Welcome To Get Bamboozled</h3>
+   <br />
+   <br />
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select name="quizcsp" id="quizcsp" class="form-control" required>
+                            <option value="">Select Cloud</option>
+                            <option value="GCP">GCP</option>
+                            <option value="AWS">AWS</option>
+                            <option value="Azure">AZURE</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <br />
+            <div class ="table-responsive" id="quizavail"></div>
+            <br />
+            <br />
+    </div>
+
+ </body>
+</html>

@@ -1,0 +1,84 @@
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Course Content</title>
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/content.css') }}">
+  <!-- <link rel="stylesheet" type="text/css" href="content.css"> -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <style>
+    @import url('http://fonts.cdnfonts.com/css/reckoner');
+    @import url('http://fonts.cdnfonts.com/css/mismo');
+    body {    
+    background: url('https://cdn.wallpapersafari.com/66/69/Zuysr2.jpg') no-repeat center fixed;     
+    background-size: cover;
+    }
+  </style>
+<script>
+    $(document).ready(function(){
+      load_data();
+      function load_data(query)
+      {
+       $.ajax({
+        url:"/ajaxgetcontent",
+        method:"POST",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#contentresult').html(data);
+          $("#contentresult").append(data.htmlresponse);
+        }
+       });
+      }
+      $('#contentcsp').change(function(){
+        var search = $(this).val();
+        if(search != ''){
+            load_data(search);
+       }else{
+        load_data();
+       }
+      });
+    });
+</script>
+</head>
+<body>
+  <div>
+    <nav class="navbar">
+      <ul class="leftnav" id="leftnav">
+        <div class="logo"><img src="https://www.igta5.com/images/gta-v-five-logo-v-only.png" alt=""></div>
+        <li><a href=studyboard>Home</a></li>
+        <li><a href=quizdisplay>Quiz</a></li>
+        <li><a class="active" href=#content>Courses</a></li>
+        <li><a href=brainstroming>Brain Storm</a></li>
+      </ul>
+      <div class="rightnav">
+        <button class="btn" onclick="window.location.href=signout" id="signout">Sign-out</button>
+      </div>
+    </nav>
+  </div>
+  <div class="container">    
+     <br />
+     <h3 style="font-family:'Mismo', sans-serif;font-size: 50px;color:#252525;text-align: center;">Course Contents</h3>
+     <br />
+            <br />
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select name="contentcsp" id="contentcsp" class="form-control">
+                            <option value="all">Select a Cloud</option>
+                            <option value="GCP">GCP</option>
+                            <option value="AWS">AWS</option>
+                            <option value="Azure">AZURE</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="contentresult"></div>
+    </div> 
+ </body>
+</html>
