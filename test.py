@@ -7,11 +7,11 @@ app.testing = True
 
 class Flask_func_testcase(unittest.TestCase):
 	def test_logintable(self):
-		result = appl.login_table("dharinath@virtusa.com")
-		self.assertEqual(result,"ok")
+		result = appl.login_table("hari.nath@gmail.com")
+		self.assertEqual(result,"password")
 
 	def test_sendmail(self):
-		result = appl.send_mail("dharinath@virtusa.com","unit_testing_by_hari")
+		result = appl.send_mail("hari.nath@gmail.com","unit_testing_by_hari")
 		self.assertEqual(result,"ok")
 
 class flask_route_testcase(unittest.TestCase):
@@ -84,12 +84,12 @@ class Flask_respodata_testcase(unittest.TestCase):
 	
 	def test_correctlogin(self):
 		tester = app.test_client(self)
-		response = tester.post('/login',data=dict(email="dharinath@virtusa.com",password="ok"), follow_redirects=True) 
+		response = tester.post('/login',data=dict(email="hari.nath@gmail.com",password="password"), follow_redirects=True) 
 		self.assertTrue(b'Home' in response.data)
 	
 	def test_incorrectlogin(self):
                 tester = app.test_client(self)
-                response = tester.post('/login',data=dict(email="dharinath@virtusa.com",password="ook"), follow_redirects=True)
+                response = tester.post('/login',data=dict(email="hari.nath@gmail.com",password="ook"), follow_redirects=True)
                 #self.assertTrue(b'Sign Up' in response.data)
                 self.assertFalse(b'Home' in response.data)
 
