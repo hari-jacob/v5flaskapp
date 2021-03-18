@@ -20,7 +20,7 @@ class flask_route_testcase(unittest.TestCase):
 		response = tester.get('/register')
 		self.assertEqual(response.status_code,200)
 	
-	def test_loginroute(self):
+	def test_loginnroute(self):
 		tester = app.test_client(self)
 		response = tester.get('/login')
 		self.assertEqual(response.status_code,200)
