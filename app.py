@@ -70,7 +70,7 @@ def register():
     password =  request.form.get("password")
     tableboo=register_table(empname,email,password)
     msgs='<p>Thanks for Registering</p><br><strong><a href="http://34.70.143.201/">Go ahead and Please login...</a></strong>'
-    send_mail(email,msgs)
+    conf = send_mail(email,msgs)
 
     if tableboo=="ok":
         return render_template('home.html')
@@ -105,16 +105,20 @@ def login():
         return render_template('regist.html')
 
 def login_table(email):
-    sqlcheck="select password from personal where email = %s;"
-    val=(email)
+    sqlcheck="select password from personal where email = '{}';".format(email)
+    #val=(email)
     cnx = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
     try:
         with cnx.cursor() as cursor:
-            cursor.execute(sqlcheck,val)
+            cursor.execute(sqlcheck)
             pwd =cursor.fetchone() 
             cnx.commit()
         cursor.close()
     except:
+        raise
+    if pwd:
+        pass
+    else:
         pwd="fail"
     return pwd[0]
 
@@ -155,7 +159,7 @@ def uploadcert():
       certboo=1
       msgs, certboo = pdfparser(file,cid,csp,email)
       html_msg="<p>The Certificate has been Validated.</p><br><strong>{}</strong>".format(msgs)
-      send_mail(email,html_msg)
+      conf = send_mail(email,html_msg)
       if certboo == 1:
           sqlin="insert into cert (cid,cname,idate,edate,email,csp) values(%s,%s,%s,%s,%s,%s);"
           val=(cid,cname,idate,edate,email,csp)
@@ -213,6 +217,7 @@ def pdfparser(data,cid,csp,email):
 
 
 def send_mail(email,msgs):
+    conf = "no"
     message = Mail(
         from_email='balaji.m.2016.cse@rajalakshmi.edu.in',
         to_emails=email,
@@ -221,8 +226,10 @@ def send_mail(email,msgs):
     try:
         sg = SendGridAPIClient('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')
         sg.send(message)
+        conf = "ok"
     except:
         pass
+    return conf
 
 @app.route("/studyboard",methods=["POST","GET"])
 def studyboard():
@@ -251,10 +258,6 @@ def studyboard():
                     lprogress.append(attended[i]/totalquiz[i])
                 else:
                     lprogress.append(0.0)
-            print("Lprogress")
-            print(lprogress[0])
-            print(lprogress[1])
-            print(lprogress[2])
     cursor.close()
     return  render_template('progress-bar.html', gcp=lprogress[0],aws=lprogress[1],azure=lprogress[2])
 
