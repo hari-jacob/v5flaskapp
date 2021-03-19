@@ -6,9 +6,8 @@ pipeline {
         sh 'echo "hello hari07"'
         sh 'echo "A one line step"'
         sh ''' 
-        echo "A multiline step"'
+        echo "A multiline step"
         pwd
-        ls -lrt
         '''
       }
     }
@@ -17,7 +16,7 @@ pipeline {
         sh 'echo "hello unittest hari07"'
         sh 'echo "A one line step"'
         sh ''' 
-        echo "A multiline step"'
+        echo "A multiline step"
         ls
         '''
       }
