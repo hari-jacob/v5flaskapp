@@ -8,7 +8,7 @@ app.testing = True
 class Flask_func_testcase(unittest.TestCase):
 	def test_logintable(self):
 		result = appl.login_table("hari.nath@gmail.com")
-		self.assertEqual(result,"passwor")
+		self.assertEqual(result,"password")
 
 	def test_sendmail(self):
 		result = appl.send_mail("hari.nath@gmail.com","unit_testing_by_hari")
