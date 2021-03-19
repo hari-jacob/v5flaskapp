@@ -5,19 +5,19 @@ pipeline {
       steps{
         script{
           sh 'echo "Build Successful"'
-          sh 'sudo python3 -m unittest test.py'
         }
       }
     }
     stage ('test: unit-test') {
       steps{
-        sh 'echo "hello unittest hari07"'
-        sh 'echo "A one line step"'
-        sh ''' 
-        echo "A multiline step"
-        echo "ok"
-        ls
-        '''
+        sh 'sudo python3 -m unittest test.py'
+        sh 'echo "Unittest Success"'
+      }
+    }
+    stage ('test: jmeter-test') {
+      steps{
+        sh 'sudo python3 -m unittest test.py'
+        sh 'echo "Perfomance Test Success"'
       }
     }
   }
