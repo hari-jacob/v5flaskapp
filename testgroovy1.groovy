@@ -5,8 +5,11 @@ pipeline {
       steps{
         script{
           sh 'echo "Build Successful"'
-          def testResult = sh 'cat i.py'
-          echo testResult
+          sh 'cd /var/lib/jenkins/workspace/unitest_app/'
+          def testResult = sh 'sudo python3 -m unittest test.py'
+          if (testResult == 'Failed'){
+            echo testResult
+          }
         }
       }
     }
