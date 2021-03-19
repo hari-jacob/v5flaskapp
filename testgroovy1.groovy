@@ -6,10 +6,7 @@ pipeline {
         script{
           sh 'echo "Build Successful"'
           sh 'cd /var/lib/jenkins/workspace/unitest_app/'
-          def testResult = sh 'sudo python3 -m unittest test.py'
-          if (testResult == 'Failed'){
-            echo testResult
-          }
+          sh 'ls'
         }
       }
     }
