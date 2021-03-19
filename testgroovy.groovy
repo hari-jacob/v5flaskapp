@@ -5,7 +5,7 @@ pipeline {
       steps{
         script{
           sh 'echo "Build Successful"'
-          sh 'ls'
+          sh 'sudo python3 -m unittest test.py'
         }
       }
     }
