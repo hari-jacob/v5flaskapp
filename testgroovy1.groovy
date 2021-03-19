@@ -5,7 +5,7 @@ pipeline {
       steps{
         script{
           sh 'echo "Build Successful"'
-          def testResult = sh 'pwd'
+          def testResult = sh 'cat i.py'
           echo testResult
         }
       }
