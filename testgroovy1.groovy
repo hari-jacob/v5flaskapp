@@ -3,12 +3,11 @@ pipeline {
   stages {
     stage ('build') {
       steps{
-        sh 'echo "hello hari07"'
-        sh 'echo "A one line step"'
-        sh ''' 
-        echo "A multiline step"
-        pwd
-        '''
+        script{
+          sh 'echo "Build Successful"'
+          def testResult = sh 'pwd'
+          echo testResult
+        }
       }
     }
     stage ('test: unit-test') {
