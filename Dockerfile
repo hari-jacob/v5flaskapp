@@ -19,7 +19,7 @@ RUN apk add py3-pip
 # RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
 RUN pip3 install Flask -q
 RUN pip3 install PyMySQL -q
-RUN pip3 install pdfminer -q
+RUN pip3 install pdfminer.six -q
 RUN pip3 install google-cloud-storage -q
 RUN pip3 install google-cloud -q
 RUN pip3 install sendgrid -q
