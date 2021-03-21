@@ -1,0 +1,9 @@
+Flask>=1.1.2
+PyMySQL
+pdfminer
+google-cloud-storage
+google-cloud
+sendgrid
+matplotlib
+numpy
+fpdf
