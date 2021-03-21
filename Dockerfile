@@ -49,7 +49,7 @@ COPY app.py /usr/src/app/
 COPY templates /usr/src/app/templates/
 COPY static usr/src/app/static/
 # tell the port number the container should expose
-# EXPOSE 5000
+EXPOSE 5000
 
 # run the application
 RUN pwd
