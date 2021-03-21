@@ -52,4 +52,6 @@ COPY static usr/src/app/static/
 EXPOSE 5000
 
 # run the application
-CMD ["python3", "/usr/src/app/app.py"]
+RUN pwd
+RUN python3 /usr/src/app/app.py
+# CMD ["python3", "/usr/src/app/app.py"]
