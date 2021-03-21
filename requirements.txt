@@ -4,5 +4,4 @@ pdfminer
 google-cloud-storage
 google-cloud
 sendgrid
-matplotlib
 fpdf
