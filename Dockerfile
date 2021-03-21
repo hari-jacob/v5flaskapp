@@ -7,6 +7,15 @@ RUN apk add py3-pip
 
 # install Python modules needed by the Python app
 COPY requirements.txt /usr/src/app/
+RUN apk add --no-cache \
+        libressl-dev \
+        musl-dev \
+        libffi-dev && \
+    pip3 install --no-cache-dir cryptography==2.1.4 && \
+    apk del \
+        libressl-dev \
+        musl-dev \
+        libffi-dev
 RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
 RUN apk add --no-cache tesseract-ocr python3 py3-numpy && \
     pip3 install --upgrade pip setuptools wheel && \
