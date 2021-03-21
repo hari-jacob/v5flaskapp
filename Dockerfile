@@ -53,5 +53,5 @@ EXPOSE 5000
 
 # run the application
 RUN pwd
-RUN python3 /usr/src/app/app.py
-# CMD ["python3", "/usr/src/app/app.py"]
+# RUN python3 /usr/src/app/app.py
+CMD ["python3", "/usr/src/app/app.py"]
