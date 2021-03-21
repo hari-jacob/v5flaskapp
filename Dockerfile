@@ -20,6 +20,7 @@ COPY requirements.txt /usr/src/app/
 
 RUN pip3 install --upgrade setuptools
 RUN pip3 install --upgrade gcloud
+RUN pip3 install pycryptodome
 # RUN pip3 install pyrebase
 
 RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
