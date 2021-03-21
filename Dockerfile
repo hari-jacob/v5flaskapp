@@ -20,7 +20,7 @@ RUN apk add py3-pip
 RUN pip3 install Flask -q
 RUN pip3 install PyMySQL -q
 # RUN pip3 install pdfminer.six -q
-RUN apk-install git
+RUN apk add git
 RUN git clone https://github.com/euske/pdfminer.git
 RUN pip3 install pdfminer.six
 RUN pip3 install google-cloud-storage -q
