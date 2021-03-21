@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 
 # Install python3 and pip3
-RUN sudo apt-get update
-RUN sudo apt-get install python3
+RUN apt-get update
+RUN apt-get install python3
 # RUN apt-get install py3-pip
-RUN sudo apt install python3-pip
+RUN apt-get install python3-pip
 
 
 # install Python modules needed by the Python app
