@@ -6,7 +6,7 @@ RUN apk add python3
 RUN apk add py3-pip
 
 # install Python modules needed by the Python app
-# COPY requirements.txt /usr/src/app/
+COPY requirements.txt /usr/src/app/
 # RUN apk add --no-cache \
 #         libressl-dev \
 #         musl-dev \
@@ -16,16 +16,16 @@ RUN apk add py3-pip
 #         libressl-dev \
 #         musl-dev \
 #         libffi-dev
-# RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
-RUN pip3 install Flask -q
-RUN pip3 install PyMySQL -q
+RUN pip3 install --no-cache-dir -r /usr/src/app/requirements.txt
+# RUN pip3 install Flask -q
+# RUN pip3 install PyMySQL -q
 # RUN pip3 install pdfminer.six -q
-RUN apk add git
-RUN git clone https://github.com/euske/pdfminer.git
-RUN pip3 install pdfminer.six
+# RUN apk add git
+# RUN git clone https://github.com/euske/pdfminer.git
+# RUN pip3 install pdfminer.six
 RUN pip3 install google-cloud-storage -q
 RUN pip3 install google-cloud -q
-RUN pip3 install sendgrid -q
+# RUN pip3 install sendgrid -q
 RUN pip3 install matplotlib -q
 RUN pip3 install numpy -q
 RUN pip3 install fpdf -q
