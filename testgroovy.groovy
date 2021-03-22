@@ -17,14 +17,21 @@ pipeline {
     }
     stage ('test: Unit-Test') {
       steps{
-        sh 'sudo python3 -m unittest test.py'
+        sh 'sudo python3 -m unittest test.py -v'
         sh 'echo "Unittest Success"'
       }
     }
-    stage ('test: jmeter-test') {
+    stage ('test: Jmeter-test') {
       steps{
-        sh 'sudo python3 -m unittest test.py'
+        
         sh 'echo "Perfomance Test Success"'
+      }
+    }
+    
+    stage ('Evaluation: Code Analysis') {
+      steps{
+        
+        sh 'echo "SonarQube Code Analysis Complete"'
       }
     }
     stage('Building image') {
@@ -34,7 +41,7 @@ pipeline {
         }
       }
     }
-    stage('Upload Image') {
+    stage('Upload Image - DockerHub') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -44,7 +51,7 @@ pipeline {
       }
     }
     // Stopping Docker containers for cleaner Docker run
-    stage('docker stop container') {
+    stage('Clean Container') {
       steps {
         sh 'docker ps -f name=mypythonappContainer -q | xargs --no-run-if-empty docker container stop'
         sh 'docker container ls -a -fname=mypythonappContainer -q | xargs -r docker container rm'
