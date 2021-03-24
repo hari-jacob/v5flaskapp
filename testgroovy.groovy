@@ -15,6 +15,17 @@ pipeline {
         }
       }
     }
+    
+    stage('PyLint: Code Analysis') {
+      steps {
+        script {
+          sh 'pip3 install pylint-flask'
+          sh 'pwd'
+          sh '/home/hari_98_d/.local/lib/python3.6/site-packages/pylint app.py'
+        }
+      }
+    }
+    
     stage ('test: Unit-Test') {
       steps{
         sh 'sudo python3 -m unittest test.py -v'
@@ -36,15 +47,7 @@ pipeline {
         sh 'echo "SonarQube Code Analysis Complete"'
       }
     }
-    stage('PyLint: Code Analysis') {
-      steps {
-        script {
-          sh 'pip3 install pylint-flask'
-          sh 'pwd'
-          sh 'pylint app.py'
-        }
-      }
-    }
+    
     stage('Building image') {
       steps{
         script {
