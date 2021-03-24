@@ -23,8 +23,9 @@ pipeline {
     }
     stage ('test: Jmeter-test') {
       steps{
-        
+        sh 'sudo /home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/jmeter -n -t /home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/google-demo.jmx -l /home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/google-demo-result.jtl'
         sh 'echo "Perfomance Test Success"'
+        perfReport '/home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/google-demo-result.jtl'
       }
     }
     
