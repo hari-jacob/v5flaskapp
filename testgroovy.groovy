@@ -38,6 +38,7 @@ pipeline {
     stage('PyLint: Code Analysis') {
       steps {
         script {
+          sh 'pip3 install pylint-flask'
           sh 'pylint --load-plugins= app.py | tee pylint.log'
           recordIssues(
             tool: pyLint(pattern: 'pylint.log'),
