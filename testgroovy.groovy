@@ -19,6 +19,7 @@ pipeline {
       steps{
         sh 'sudo python3 -m unittest test.py -v'
         sh 'echo "Unittest Success"'
+        sh 'pwd'
       }
     }
     stage ('test: Jmeter-test') {
@@ -39,11 +40,8 @@ pipeline {
       steps {
         script {
           sh 'pip3 install pylint-flask'
-          sh 'pylint --load-plugins=pylint_flask app.py | tee pylint.log'
-          recordIssues(
-            tool: pyLint(pattern: 'pylint.log'),
-            failTotalHigh: 10,
-          )
+          sh 'pwd'
+          sh 'pylint app.py'
         }
       }
     }
