@@ -16,15 +16,15 @@ pipeline {
       }
     }
     
-    stage('PyLint: Code Analysis') {
+    /*stage('PyLint: Code Analysis') {
       steps {
         script {
           sh 'pip3 install pylint-flask'
           sh 'pwd'
-          sh 'sudo pylint app.py'
+          sh 'sudo pylint -load-plugins pylint_flask app.py'
         }
       }
-    }
+    }*/
     
     stage ('test: Unit-Test') {
       steps{
