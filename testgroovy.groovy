@@ -21,7 +21,7 @@ pipeline {
         script {
           sh 'pip3 install pylint-flask'
           sh 'pwd'
-          sh '/home/hari_98_d/.local/lib/python3.6/site-packages/pylint app.py'
+          sh 'sudo /home/hari_98_d/.local/lib/python3.6/site-packages/pylint app.py'
         }
       }
     }
