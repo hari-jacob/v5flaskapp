@@ -39,7 +39,7 @@ pipeline {
       steps {
         script {
           sh 'pip3 install pylint-flask'
-          sh 'pylint --load-plugins= app.py | tee pylint.log'
+          sh 'pylint --load-plugins=pylint_flask app.py | tee pylint.log'
           recordIssues(
             tool: pyLint(pattern: 'pylint.log'),
             failTotalHigh: 10,
