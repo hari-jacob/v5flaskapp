@@ -29,10 +29,21 @@ pipeline {
       }
     }
     
-    stage ('Evaluation: Code Analysis') {
+    stage ('SonarQube: Code Analysis') {
       steps{
         
         sh 'echo "SonarQube Code Analysis Complete"'
+      }
+    }
+    stage('PyLint: Code Analysis') {
+      steps {
+        script {
+          sh 'pylint --load-plugins= app.py | tee pylint.log'
+          recordIssues(
+            tool: pyLint(pattern: 'pylint.log'),
+            failTotalHigh: 10,
+          )
+        }
       }
     }
     stage('Building image') {
