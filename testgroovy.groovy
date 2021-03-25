@@ -16,7 +16,7 @@ pipeline {
       }
     }
     
-    stage('PyLint: Code Analysis') {
+    /*stage('PyLint: Code Analysis') {
       steps {
         script {
           sh 'pylint sample.py | tee pylint.log'
@@ -26,7 +26,7 @@ pipeline {
           )
         }
       }
-    }
+    }*/
     
     stage ('test: Unit-Test') {
       steps{
@@ -47,6 +47,29 @@ pipeline {
       steps{
         
         sh 'echo "SonarQube Code Analysis Complete"'
+      }
+    }
+    
+    stage('SonarQube analysis') {
+      environment {
+        scannerHome = tool 'scanner'
+      }
+      steps {
+        withSonarQubeEnv('SonarQube') {
+          sh '''
+          ${scannerHome}/bin/ \
+          -D sonar.login=admin \
+          -D sonar.password=gcp \
+          -D sonar.projectKey= quizapp \
+          -D sonar.projectName= quizapp \
+          -D sonar.projectVersion=1.0 \
+          -D sonar.sources= /var/lib/jenkins/workspace/test_pipeline/app.py \
+          -D sonar.language=py \
+          -D sonar.sourceEncoding=UTF-8 \
+          -D sonar.python.xunit.reportPath=nosetests.xml \
+          -D sonar.python.coverage.reportPath=coverage.xml
+          '''
+        }
       }
     }
     
