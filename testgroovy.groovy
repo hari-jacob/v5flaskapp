@@ -19,7 +19,11 @@ pipeline {
     stage('PyLint: Code Analysis') {
       steps {
         script {
-          sh 'pylint app.py'
+          sh 'pylint --load-plugins=pylint_flask app.py | tee pylint.log'
+          recordIssues(
+            tool: pyLint(pattern: 'pylint.log'),
+            failTotalHigh: 10,
+          )
         }
       }
     }
