@@ -63,7 +63,7 @@ pipeline {
           -D sonar.projectKey=quizapp \
           -D sonar.projectName=quizapp \
           -D sonar.projectVersion=1.0 \
-          -D sonar.sources= /var/lib/jenkins/workspace/test_pipeline/app.py \
+          -D sonar.sources=/var/lib/jenkins/workspace/test_pipeline/app.py \
           -D sonar.language=py \
           -D sonar.sourceEncoding=UTF-8 \
           -D sonar.python.xunit.reportPath=nosetests.xml \
