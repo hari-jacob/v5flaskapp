@@ -57,7 +57,7 @@ pipeline {
       steps {
         withSonarQubeEnv('SonarQube') {
           sh '''
-          sudo ${scannerHome}/bin/ \
+          sudo ${scannerHome}/bin/sonar-scanner \
           -D sonar.login=admin \
           -D sonar.password=gcp \
           -D sonar.projectKey= quizapp \
