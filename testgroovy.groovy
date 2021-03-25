@@ -26,7 +26,7 @@ pipeline {
           )
         }
       }
-    }
+    }*/
     
     stage ('test: Unit-Test') {
       steps{
@@ -35,22 +35,16 @@ pipeline {
         sh 'pwd'
       }
     }
+    
     stage ('test: Jmeter-test') {
       steps{
         sh 'sudo /home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/jmeter -n -t /home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/google-demo.jmx -l /home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/google-demo-result.jtl'
         sh 'echo "Perfomance Test Success"'
         perfReport '/home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/google-demo-result.jtl'
       }
-    }*/
-    
-    stage ('SonarQube: Code Analysis') {
-      steps{
-        
-        sh 'echo "SonarQube Code Analysis Complete"'
-      }
     }
     
-    stage('SonarQube analysis') {
+    stage('SonarQube: Code Analysis') {
       environment {
         scannerHome = tool 'scanner'
       }
