@@ -60,8 +60,8 @@ pipeline {
           sudo ${scannerHome}/bin/sonar-scanner \
           -D sonar.login=admin \
           -D sonar.password=gcp \
-          -D sonar.projectKey= quizapp \
-          -D sonar.projectName= quizapp \
+          -D sonar.projectKey=quizapp \
+          -D sonar.projectName=quizapp \
           -D sonar.projectVersion=1.0 \
           -D sonar.sources= /var/lib/jenkins/workspace/test_pipeline/app.py \
           -D sonar.language=py \
