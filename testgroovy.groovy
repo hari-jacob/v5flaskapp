@@ -26,7 +26,7 @@ pipeline {
           )
         }
       }
-    }*/
+    }
     
     stage ('test: Unit-Test') {
       steps{
@@ -41,7 +41,7 @@ pipeline {
         sh 'echo "Perfomance Test Success"'
         perfReport '/home/davidbala592/jmeter/apache-jmeter-5.4.1/bin/google-demo-result.jtl'
       }
-    }
+    }*/
     
     stage ('SonarQube: Code Analysis') {
       steps{
