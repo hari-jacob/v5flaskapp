@@ -2,8 +2,8 @@
 Code to add two numbers
 """
 
-a = 23
-b = 45
-c = a + b
+A = 23
+B = 45
+C = A + B
 
-print(c)
+print c
