@@ -26,7 +26,7 @@ pipeline {
           )
         }
       }
-    }
+    }*/
     
     stage ('test: Unit-Test') {
       steps{
@@ -66,7 +66,7 @@ pipeline {
           '''
         }
       }
-    }*/
+    }
     
     stage('Building image') {
       steps{
@@ -79,7 +79,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()  
+            dockerImage.push("${env.BUILD_ID}")  
           }
         }
       }
