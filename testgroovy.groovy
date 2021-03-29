@@ -26,7 +26,7 @@ pipeline {
           )
         }
       }
-    }*/
+    }
     
     stage ('test: Unit-Test') {
       steps{
@@ -66,7 +66,7 @@ pipeline {
           '''
         }
       }
-    }
+    }*/
     
     stage('Building image') {
       steps{
