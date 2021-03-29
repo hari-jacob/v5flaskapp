@@ -108,8 +108,8 @@ def login():
 def login_table(email):
     sqlcheck="select password from personal where email = '{}';".format(email)
     #val=(email)
-    cnx = pymysql.connect(user=db_user, password=db_password, unix_socket=unix_socket, db=db_name)
-    #cnx = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
+    #cnx = pymysql.connect(user=db_user, password=db_password, unix_socket=unix_socket, db=db_name)
+    cnx = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
     try:
         with cnx.cursor() as cursor:
             cursor.execute(sqlcheck)
