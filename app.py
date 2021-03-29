@@ -29,6 +29,7 @@ db_user = "baarath"
 db_password = "baarath"
 db_name = "certdets"
 db_connection_name = "tasko-task:asia-south1:mydbinsta"
+unix_socket = '/cloudsql/{}'.format(db_connection_name)
 host='35.244.62.185'
 
 app = Flask(__name__)
@@ -107,7 +108,8 @@ def login():
 def login_table(email):
     sqlcheck="select password from personal where email = '{}';".format(email)
     #val=(email)
-    cnx = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
+    cnx = pymysql.connect(user=db_user, password=db_password, unix_socket=unix_socket, db=db_name)
+    #cnx = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
     try:
         with cnx.cursor() as cursor:
             cursor.execute(sqlcheck)
