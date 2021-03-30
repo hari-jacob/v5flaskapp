@@ -2,21 +2,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
- name: myapplication2
+ name: userapplication
  labels:
-  app: myapplication2
+  app: userapplication
 spec:
  replicas: 2
  selector:
   matchLabels:
-   app: myapplication2
+   app: userapplication
  template:
   metadata: 
    labels:
-    app: myapplication2
+    app: userapplication
   spec:
    containers:
-   - name: myapplication2
+   - name: userapplication
      image: harinathdockerid/v5flaskapp:tagversion
      ports:
      - containerPort: 5000
@@ -24,11 +24,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: helloapp
+  name: userapp
 spec:
   type: LoadBalancer
   selector:
-    app: myapplication2
+    app: userapplication
   ports:
     - protocol: TCP
       port: 80
